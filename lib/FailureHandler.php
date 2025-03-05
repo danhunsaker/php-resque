@@ -16,7 +16,7 @@ use Error;
 class FailureHandler
 {
 	/**
-	 * @var string Class name representing the backend to pass failed jobs off to.
+	 * @var string|null Class name representing the backend to pass failed jobs off to.
 	 */
 	private static $backend;
 
@@ -57,7 +57,7 @@ class FailureHandler
 	 */
 	public static function getBackend()
 	{
-		if (self::$backend === null) {
+		if (is_null(self::$backend)) {
 			self::$backend = 'Resque\Failure\RedisFailure';
 		}
 

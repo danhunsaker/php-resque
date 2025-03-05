@@ -1,0 +1,3 @@
+parameters:
+    tips:
+        treatPhpDocTypesAsCertain: false

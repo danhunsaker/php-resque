@@ -51,7 +51,7 @@ class SchedulerWorker
 	*/
 	public function work($interval = null)
 	{
-		if ($interval !== null) {
+		if (!is_null($interval)) {
 			$this->interval = $interval;
 		}
 

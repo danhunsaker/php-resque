@@ -3,8 +3,10 @@
 namespace Resque\Job;
 
 /**
- * @property array $args
- * @property string $queue
+ * @property array|null              $args
+ * @property string|null             $queue
+ * @property \Resque\JobHandler|null $job
+ * @phpstan-require-extends \stdClass
  */
 interface JobInterface
 {

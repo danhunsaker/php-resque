@@ -95,7 +95,7 @@ class Scheduler
 	public static function getDelayedTimestampSize($timestamp)
 	{
 		$timestamp = self::getTimestamp($timestamp);
-		return Resque::redis()->llen('delayed:' . $timestamp, $timestamp);
+		return Resque::redis()->llen('delayed:' . $timestamp);
 	}
 
 	/**
@@ -224,7 +224,7 @@ class Scheduler
 	 */
 	public static function nextDelayedTimestamp($at = null)
 	{
-		if ($at === null) {
+		if (is_null($at)) {
 			$at = time();
 		} else {
 			$at = self::getTimestamp($at);

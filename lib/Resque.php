@@ -65,7 +65,7 @@ class Resque
 	 */
 	public static function redis()
 	{
-		if (self::$redis !== null) {
+		if (!is_null(self::$redis)) {
 			return self::$redis;
 		}
 

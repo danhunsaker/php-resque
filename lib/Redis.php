@@ -184,7 +184,7 @@ class Redis
 				}
 			}
 
-			if ($database !== null) {
+			if (!is_null($database)) {
 				$this->driver->select($database);
 			}
 		} catch (CredisException $e) {

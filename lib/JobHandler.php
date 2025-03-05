@@ -40,7 +40,7 @@ class JobHandler
 	private $instance;
 
 	/**
-	 * @var \Resque\Job\FactoryInterface
+	 * @var \Resque\Job\FactoryInterface|null
 	 */
 	private $jobFactory;
 
@@ -75,11 +75,6 @@ class JobHandler
 			$id = Resque::generateJobId();
 		}
 
-		if ($args !== null && !is_array($args)) {
-			throw new InvalidArgumentException(
-				'Supplied $args must be an array.'
-			);
-		}
 		Resque::push($queue, array(
 			'class'	     => $class,
 			'args'	     => array($args),
@@ -325,7 +320,7 @@ class JobHandler
 	 */
 	public function getJobFactory()
 	{
-		if ($this->jobFactory === null) {
+		if (is_null($this->jobFactory)) {
 			$this->jobFactory = new Factory();
 		}
 		return $this->jobFactory;
