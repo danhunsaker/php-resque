@@ -59,12 +59,12 @@ class JobHandler
 	/**
 	 * Create a new job and save it to the specified queue.
 	 *
-	 * @param string 	   $queue The name of the queue to place the job in.
-	 * @param class-string $class The name of the class that contains the code to execute the job.
-	 * @param array|null   $args Any optional arguments that should be passed when the job is executed.
+	 * @param string 	   $queue   The name of the queue to place the job in.
+	 * @param class-string $class   The name of the class that contains the code to execute the job.
+	 * @param array|null   $args    Any optional arguments that should be passed when the job is executed.
 	 * @param boolean 	   $monitor Set to true to be able to monitor the status of a job.
-	 * @param string 	   $id Unique identifier for tracking the job. Generated if not supplied.
-	 * @param string 	   $prefix The prefix needs to be set for the status key
+	 * @param string 	   $id      Unique identifier for tracking the job. Generated if not supplied.
+	 * @param string 	   $prefix  The prefix needs to be set for the status key
 	 *
 	 * @return string
 	 * @throws \InvalidArgumentException
