@@ -14,6 +14,34 @@ use InvalidArgumentException;
  * @package		Resque/Redis
  * @author		Chris Boulton <chris@bigcommerce.com>
  * @license		http://www.opensource.org/licenses/mit-license.php
+ *
+ * @mixin Credis_Cluster
+ * @method string get(string $key)
+ * @method bool exists(string $key)
+ * @method array smembers(string $set)
+ * @method bool sismember(string $set, string $key)
+ * @method bool del(string $key)
+ * @method void set(string $key, mixed $value)
+ * @method bool expire(string $key, string $key2)
+ * @method bool ping(?string $value = null)
+ * @method bool incrby(string $key, int $increment)
+ * @method bool decrby(string $key, int $decrement)
+ * @method bool rpush(string $key, string ...$element)
+ * @method array blpop(string $key, int $timeout)
+ * @method array lpop(string $key, int $count = 1)
+ * @method array rpop(string $key, int $count = 1)
+ * @method int llen(string $key)
+ * @method array lrange(string $key, int $start, int $stop)
+ * @method int rpoplpush(string $source, string $destination)
+ * @method void zadd(string $key, int $score, string $member)
+ * @method int zcard(string $key)
+ * @method int sadd(string $key, string $member)
+ * @method int srem(string $key, string $member)
+ * @method int lrem(string $key, int $count, string $element)
+ * @method array keys(string $pattern)
+ * @method int zrem(string $key, string $member)
+ * @method array zrangebyscore(string $key, int $min, int $max, bool $scores)
+
  */
 class Redis
 {
@@ -120,7 +148,7 @@ class Redis
 	}
 
 	/**
-	 * @param string|array $server A DSN or array
+	 * @param string|array|object $server A DSN or array
 	 * @param int $database A database number to select. However, if we find a valid database number in the DSN the
 	 *                      DSN-supplied value will be used instead and this parameter is ignored.
 	 * @param object $client Optional Credis_Cluster or Credis_Client instance instantiated by you

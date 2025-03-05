@@ -25,7 +25,7 @@ class JobHandler
 	public $queue;
 
 	/**
-	 * @var \Resque\Worker\Resque Instance of the Resque worker running this job.
+	 * @var \Resque\Worker\ResqueWorker Instance of the Resque worker running this job.
 	 */
 	public $worker;
 
@@ -35,7 +35,7 @@ class JobHandler
 	public $payload;
 
 	/**
-	 * @var object|\Resque\Job\JobInterface Instance of the class performing work for this job.
+	 * @var object|\Resque\Job\JobInterface|null Instance of the class performing work for this job.
 	 */
 	private $instance;
 
@@ -59,12 +59,12 @@ class JobHandler
 	/**
 	 * Create a new job and save it to the specified queue.
 	 *
-	 * @param string $queue The name of the queue to place the job in.
-	 * @param string $class The name of the class that contains the code to execute the job.
-	 * @param array $args Any optional arguments that should be passed when the job is executed.
-	 * @param boolean $monitor Set to true to be able to monitor the status of a job.
-	 * @param string $id Unique identifier for tracking the job. Generated if not supplied.
-	 * @param string $prefix The prefix needs to be set for the status key
+	 * @param string 	   $queue The name of the queue to place the job in.
+	 * @param class-string $class The name of the class that contains the code to execute the job.
+	 * @param array|null   $args Any optional arguments that should be passed when the job is executed.
+	 * @param boolean 	   $monitor Set to true to be able to monitor the status of a job.
+	 * @param string 	   $id Unique identifier for tracking the job. Generated if not supplied.
+	 * @param string 	   $prefix The prefix needs to be set for the status key
 	 *
 	 * @return string
 	 * @throws \InvalidArgumentException
@@ -187,8 +187,10 @@ class JobHandler
 			return $this->instance;
 		}
 
-		$this->instance = $this->getJobFactory()->create($this->payload['class'], $this->getArguments(), $this->queue);
+		$this->instance = $this->getJobFactory()
+							   ->create($this->payload['class'], $this->getArguments(), $this->queue);
 		$this->instance->job = $this;
+
 		return $this->instance;
 	}
 
@@ -197,7 +199,7 @@ class JobHandler
 	 * associated with the job with the supplied arguments.
 	 *
 	 * @return bool
-	 * @throws Resque\Exceptions\ResqueException When the job's class could not be found
+	 * @throws \Resque\Exceptions\ResqueException When the job's class could not be found
 	 * 											 or it does not contain a perform method.
 	 */
 	public function perform()
@@ -308,8 +310,8 @@ class JobHandler
 	}
 
 	/**
-	 * @param Resque\Job\FactoryInterface $jobFactory
-	 * @return Resque\JobHandler
+	 * @param \Resque\Job\FactoryInterface $jobFactory
+	 * @return \Resque\JobHandler
 	 */
 	public function setJobFactory(FactoryInterface $jobFactory)
 	{
@@ -319,7 +321,7 @@ class JobHandler
 	}
 
 	/**
-	 * @return Resque\Job\FactoryInterface
+	 * @return \Resque\Job\FactoryInterface
 	 */
 	public function getJobFactory()
 	{

@@ -2,6 +2,10 @@
 
 namespace Resque\Job;
 
+/**
+ * @property array $args
+ * @property string $queue
+ */
 interface JobInterface
 {
 	/**

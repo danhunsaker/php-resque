@@ -53,7 +53,7 @@ class FailureHandler
 	/**
 	 * Return an instance of the backend for saving job failures.
 	 *
-	 * @return object Instance of backend object.
+	 * @return object|string Instance of backend object.
 	 */
 	public static function getBackend()
 	{
